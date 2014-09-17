@@ -395,7 +395,7 @@ Vracia informácie o zmenenom rodukte - jeho ID a URL, na kterom je dostupné.
 - cod ("54.98") ... suma dobierky - ak to nie je dobierka, tento parameter vynechat, alebo nastaviť nulovú hodnotu
 - note ("poznamka") ... poznámka k objednávke (slúži pre fulfillment centrum - nepreposiela sa adresátovi
 - items (required) ... zoznam produktov ID + množstvo - je nutné aby bol produkt vytvorený
-
+- invoiceLink ("http://example.com/order/inv123.pdf") ... odkaz na PDF verziu faktúry
 ***notifyLinks***
 
 - confirmed ("http://example.com/api/order/123/confirm") ... odkaz, ktorý sa volá ked je objednávka potvrdená a vstupuje do procesu balenia
@@ -425,6 +425,7 @@ Vracia informácie o zmenenom rodukte - jeho ID a URL, na kterom je dostupné.
                 "parcelService": "ups",
                 "cod": "54.98",
                 "note": "poznamka",
+                "invoiceLink": "http://example.com/order/inv123.pdf"
                 "_embedded":{
                     items[
                         {
