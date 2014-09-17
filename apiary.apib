@@ -337,21 +337,6 @@ Vracia informácie o zmenenom rodukte - jeho ID a URL, na kterom je dostupné.
                 "_id": 1
             }
 
-+ Response 409
-
-    + Headers
-
-            Link: </products/1>;rel=self
-
-    + Body
-
-            {
-                "_links": {
-                    "self": { "href": "/products/1" }
-                },
-                "error": "Resource already exists, send PUT at address in _links.self.href"
-            }
-
 
 + Response 500
 
@@ -554,7 +539,7 @@ Vráti info o konkretnej objednávke
 
     + Headers
             
-            Allow: GET, PUT
+            Allow: GET, PUT, DELETE
 
 + Response 500
 
@@ -624,7 +609,7 @@ Prepíše objednávku s rovnakým ID, je možné len v prípade, že je v stave 
                 "_links": {
                     "self": { "href": "/orders/1" }
                 },
-                "error": "Resource already exists, send PUT at address in _links.self.href"
+                "error": "Order has not Pending status"
             }
 
 
@@ -643,9 +628,78 @@ Prepíše objednávku s rovnakým ID, je možné len v prípade, že je v stave 
 
     + Headers
             
-            Allow: GET, PUT
+            Allow: GET, PUT, DELETE
 
 + Response 500
+
+
+### DELETE
+
+Vymaže objednávku je možné len v prípade, že je v stave Pending.
+
++ Request (application/json)
+
+    + Headers
+    
+            X-Authentication-Simple: base64_encode(token)
+
+    + Body
+
+            {
+                "id": 123,
+            }
+
++ Response 201 (application/hal+json)
+
+    + Headers
+
+            Link: </orders/1>;rel=self
+
+    + Body
+
+            {
+                "_links": {
+                    "self": { "href": "/orders/1" }
+                },
+                "_id": 1
+            }
+
++ Response 409
+
+    + Headers
+
+            Link: </orders/1>;rel=self
+
+    + Body
+
+            {
+                "_links": {
+                    "self": { "href": "/orders/1" }
+                },
+                "error": "Order has not Pending status"
+            }
+
+
++ Response 500
+
+
++ Request Unauthorized
+
+    + Headers
+    
+            X-Authentication-Simple: abcd
+
++ Response 401
+
++ Response 405
+
+    + Headers
+            
+            Allow: GET, PUT, DELETE
+
++ Response 500
+
+
 
 
 
