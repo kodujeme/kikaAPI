@@ -377,21 +377,21 @@ Vracia informácie o zmenenom rodukte - jeho ID a URL, na kterom je dostupné.
     + Body
 
             {
-                "id": 123,
-                "name": "Martin Novák",
-                "street": "Hronská 35",
-                "city": "Zvolen",
-                "psc": "96001",
-                "country": "sk",
-                "email": "email@example.com",
-                "phone": "00421900123456",
-                "variableSymbol": "588988552",
-                "cod": "54.98",
-                "note": "poznamka"
+                "id": 123, // unikátne ID objednávky - objednávka s konkrétnym ID bude akceptovaná len jeden krát
+                "name": "Martin Novák", //Meno a priezvisko adresáta
+                "street": "Hronská 35", //Adresa doručenia
+                "city": "Zvolen", //Mesto doručenia
+                "psc": "96001", //
+                "country": "sk", //ISO 3166-1 alpha-2
+                "email": "email@example.com", //email adresáta
+                "phone": "00421900123456", //tel. číslo adresáta
+                "variableSymbol": "588988552", //variabilný symbol
+                "cod": "54.98", //suma dobierky - ak to nie je dobierka, tento parameter vynechat, alebo nastaviť nulovú hodnotu
+                "note": "poznamka" //poznámka k objednávke (slúži pre fulfillment centrum - nepreposiela sa adresátovi)
                 "_embedded":{
                     items[
                         {
-                            id: "123",
+                            id: "123", //kód produktu - je nutné aby bol produkt vytvorený
                             qty: "5"
                         }
                         {
@@ -401,8 +401,8 @@ Vracia informácie o zmenenom rodukte - jeho ID a URL, na kterom je dostupné.
                     ]
                     notifyLinks[
                         {
-                            confirmed: "http://example.com/api/order/123/confirm"
-                            send: "http://example.com/api/order/123/send"
+                            confirmed: "http://example.com/api/order/123/confirm" //odkaz, ktorý sa volá ked je objednávka potvrdená a vstupuje do procesu balenia
+                            send: "http://example.com/api/order/123/send" //odkaz, ktorý sa volá keď je objednávka je kompletná a opúšťa proces balenia
                         }
                     ]
                 }
