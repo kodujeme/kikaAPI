@@ -417,6 +417,7 @@ Vracia informácie o zmenenom rodukte - jeho ID a URL, na kterom je dostupné.
                 "street": "Hronská 35",
                 "city": "Zvolen",
                 "psc": "96001",
+                "parcelService": "ups",
                 "country": "sk",
                 "email": "email@example.com",
                 "phone": "00421900123456",
@@ -517,7 +518,9 @@ Vráti info o konkretnej objednávke
 
             {
                 "id": 123,
-                "status": "Delivered" //Pending, Confirmed, Send, Delivered
+                "status": "Delivered", //Pending, Confirmed, Send, Delivered
+                "trackingNumber": 4564554654,
+                "parcelService": "ups",
                 "name": "Martin Novák", 
                 "street": "Hronská 35",
                 "city": "Zvolen", 
