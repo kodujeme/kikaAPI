@@ -377,15 +377,15 @@ Vracia informácie o zmenenom rodukte - jeho ID a URL, na kterom je dostupné.
     + Body
 
             {
-                "id": 123, // unikátne ID objednávky (string 30) - objednávka s konkrétnym ID bude akceptovaná len jeden krát
-                "name": "Martin Novák", //Meno a priezvisko adresáta
-                "street": "Hronská 35", //Adresa doručenia
-                "city": "Zvolen", //Mesto doručenia
-                "psc": "96001", //
-                "country": "sk", //ISO 3166-1 alpha-2
-                "email": "email@example.com", //email adresáta
-                "phone": "00421900123456", //tel. číslo adresáta
-                "variableSymbol": "588988552", //variabilný symbol
+                "id": 123, //[povinné] unikátne ID objednávky (string 30) - objednávka s konkrétnym ID bude akceptovaná len jeden krát. Ako ID je možné použiť napr variabilný symbol
+                "name": "Martin Novák", //[povinné] Meno a priezvisko adresáta
+                "street": "Hronská 35", //[povinné] Adresa doručenia
+                "city": "Zvolen", //[povinné] Mesto doručenia
+                "psc": "96001", //[povinné]
+                "country": "sk", //[povinné] ISO 3166-1 alpha-2
+                "email": "email@example.com", //[povinné] email adresáta
+                "phone": "00421900123456", //[povinné] tel. číslo adresáta
+                "variableSymbol": "588988552", //[povinné] variabilný symbol
                 "cod": "54.98", //suma dobierky - ak to nie je dobierka, tento parameter vynechat, alebo nastaviť nulovú hodnotu
                 "note": "poznamka" //poznámka k objednávke (slúži pre fulfillment centrum - nepreposiela sa adresátovi)
                 "_embedded":{
