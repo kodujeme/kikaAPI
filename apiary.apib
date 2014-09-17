@@ -92,7 +92,14 @@ Keď token vyprší, je potrebné sa znovu prihlásiť a získat nový token.
 
 ### POST
 
-Vrací informace o nově vytvořeném zboží - jeho interní ID a URL, na kterém je dostupné.
+Vracia informácie o novo vytvorenom produkte - jeho ID a URL, na kterom je dostupné.
+
+**Parameters**
+
+- id (required, 123) ... unikátne ID produktu (na základe tohoto kódu sa párujú produkty, preto sa musí jednať o unikátne ID pre každý výrobok, ktoré sa v čase nemení)
+- ean ("8580000000000") ... EAN-13
+- name (required, "Šampón") ... názov produktu (max 150 znakov)
+- photoUrl ("http://example.com/image.png") ... odkaz na verejne prístupnú fotografiu produktu, napr. v e-shope (max 255 znakov)
 
 + Request (application/json)
 
@@ -165,7 +172,7 @@ Vrací informace o nově vytvořeném zboží - jeho interní ID a URL, na kter�
 
 + Parameters
 
-    + page (optional, number, `1`) ... Numeric `page` for pagination.
+    + page (optional, number, `1`) ... Číslo strany
 
 ### GET
 
