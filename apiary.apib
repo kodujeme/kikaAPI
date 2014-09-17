@@ -95,9 +95,9 @@ Keď token vyprší, je potrebné sa znovu prihlásiť a získat nový token.
 Vracia informácie o novo vytvorenom produkte - jeho ID a URL, na kterom je dostupné.
 
  + Parameters
-    + id (required, 123) ... unikátne ID produktu (na základe tohoto kódu sa párujú produkty, preto sa musí jednať o unikátne ID pre každý výrobok, ktoré sa v čase nemení)
+    + id (required, 123) ... (povinné) unikátne ID produktu (na základe tohoto kódu sa párujú produkty, preto sa musí jednať o unikátne ID pre každý výrobok, ktoré sa v čase nemení)
     + ean ("8580000000000") ... EAN-13
-    + name (required, "Šampón") ... názov produktu (max 150 znakov)
+    + name (required, "Šampón") ... (povinné) názov produktu (max 150 znakov)
     + photoUrl ("http://example.com/image.png") ... odkaz na verejne prístupnú fotografiu produktu, napr. v e-shope (max 255 znakov)
 
 + Request (application/json)
