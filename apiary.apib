@@ -473,7 +473,12 @@ Vracia informácie o zmenenom rodukte - jeho ID a URL, na kterom je dostupné.
     
             X-Authentication-Simple: abcd
 
-+ Response 401
++ Response 400
+    + Body
+
+            {
+                "error": "Product with id 124 not found, please create it via POST /products"
+            }
 
 + Response 405
 
@@ -596,7 +601,12 @@ Prepíše objednávku s rovnakým ID, je možné len v prípade, že je v stave 
                 },
                 "_id": 1
             }
++ Response 400
+    + Body
 
+            {
+                "error": "Product with id 124 not found, please create it via POST /products"
+            }
 + Response 409
 
     + Headers
