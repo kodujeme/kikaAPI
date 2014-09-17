@@ -290,7 +290,7 @@ Vracia informácie o zmenenom rodukte - jeho ID a URL, na kterom je dostupné.
 
 **Parameters**
 
-- id (123) ... unikátne ID produktu (na základe tohoto kódu sa párujú produkty, preto sa musí jednať o unikátne ID pre každý výrobok, ktoré sa v čase nemení)
+- id (123) ... unikátne ID produktu (string 30) (na základe tohoto kódu sa párujú produkty, preto sa musí jednať o unikátne ID pre každý výrobok, ktoré sa v čase nemení)
 - ean ("8580000000000") ... EAN-13
 - name ("Šampón") ... názov produktu (max 150 znakov)
 - photoUrl ("http://example.com/image.png") ... odkaz na verejne prístupnú fotografiu produktu, napr. v e-shope (max 255 znakov)
@@ -377,7 +377,7 @@ Vracia informácie o zmenenom rodukte - jeho ID a URL, na kterom je dostupné.
     + Body
 
             {
-                "id": 123, // unikátne ID objednávky - objednávka s konkrétnym ID bude akceptovaná len jeden krát
+                "id": 123, // unikátne ID objednávky (string 30) - objednávka s konkrétnym ID bude akceptovaná len jeden krát
                 "name": "Martin Novák", //Meno a priezvisko adresáta
                 "street": "Hronská 35", //Adresa doručenia
                 "city": "Zvolen", //Mesto doručenia
@@ -464,11 +464,11 @@ Vracia informácie o zmenenom rodukte - jeho ID a URL, na kterom je dostupné.
 
 + Parameters
 
-    + id (required, number, `1`) ... Numeric `id` of the Order to perform action with. Has example value.
+    + id (required, 1) ... ID objednávky
 
 ### GET
 
-Vráti info o konkretnej objednavke
+Vráti info o konkretnej objednávke
 
 + Request (application/json)
 
@@ -482,8 +482,29 @@ Vráti info o konkretnej objednavke
 
             {
                 "id": 123,
-                "status": "Delivered"
-                
+                "status": "Delivered" //Pending, Confirmed, Send, Delivered
+                "name": "Martin Novák", 
+                "street": "Hronská 35",
+                "city": "Zvolen", 
+                "psc": "96001", 
+                "country": "sk", 
+                "email": "email@example.com",
+                "phone": "00421900123456",
+                "variableSymbol": "588988552", 
+                "cod": "54.98", 
+                "note": "poznamka"
+                "_embedded":{
+                    items[
+                        {
+                            id: "123",
+                            qty: "5"
+                        }
+                        {
+                            id: "124",
+                            qty: "1"
+                        }
+                    ]
+                }
             }
 
 + Response 405
@@ -495,7 +516,9 @@ Vráti info o konkretnej objednavke
 + Response 500
 
 
-### PATCH
+### PUT
+
+Prepíše objednávku s rovnakým ID, je možné len v prípade, že je v stave Pending.
 
 + Request (application/json)
 
