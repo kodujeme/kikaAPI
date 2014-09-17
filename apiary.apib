@@ -114,6 +114,17 @@ Vracia informácie o novo vytvorenom produkte - jeho ID a URL, na kterom je dost
                 "ean": "1234",
                 "name": "Šampón",
                 "photoUrl": "http://example.com/image.png"
+                "type": "single"// defaulne "single" - nepovinný parameter, moze byť "multi" v prípade, že sa jedna o zložený výrobok
+                "_embedded":{
+                    parts[ //uvadzat len v pripade type: multi - zoznam produktov (musia existovat), z ktorych sa sklada zlozeny produkt
+                        {
+                            id: "123",
+                        }
+                        {
+                            id: "124",
+                        }
+                    ]
+                }
             }
 
 + Response 201 (application/hal+json)
