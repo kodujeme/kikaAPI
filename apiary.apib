@@ -162,7 +162,7 @@ Vracia informácie o novo vytvorenom produkte - jeho ID a URL, na kterom je dost
 
     + Headers
             
-            Allow: POST, GET
+            Allow: POST, GET, PATCH
 
 + Response 500
 
@@ -210,7 +210,6 @@ Umožňuje procházet existujúce produkty v databáze, vracia informácie o vý
                             },
                             "_id": 1,
     
-                            "id": 1,
                             "ean": "8580000000000",
                             "name": "Šampón",
                             "photoUrl": "http://example.com/image1.png"
@@ -222,7 +221,6 @@ Umožňuje procházet existujúce produkty v databáze, vracia informácie o vý
                             },
                             "_id": 2,
     
-                            "id": 2,
                             "ean": "4321000000000",
                             "name": "Mydlo",
                             "photoUrl": "http://example.com/image2.png"
@@ -238,7 +236,7 @@ Umožňuje procházet existujúce produkty v databáze, vracia informácie o vý
 
     + Headers
             
-            Allow: POST, GET
+            Allow: POST, PATCH, GET
 
 + Response 500
 
@@ -248,11 +246,11 @@ Umožňuje procházet existujúce produkty v databáze, vracia informácie o vý
 
 + Parameters
 
-    + id (required, number, `1`) ... Numeric `id` of the Order to perform action with. Has example value.
-
+    + id (required, `123456`) ...  Unikátne ID použité pri vytvorení produktu
+    
 ### GET
 
-Vrátí informace o konkrétním zboží na skladě
+Vrátí informace o konkrétnom produkte a jeho aktuálny stav na sklade
 
 + Request (application/json)
 
@@ -270,8 +268,7 @@ Vrátí informace o konkrétním zboží na skladě
                 },
                 "_id": 1,
 
-                "id": 123,
-                "ean": "1234",
+                "ean": "8580000000000",
                 "name": "Šampón",
                 "photoUrl": "http://example.com/image.png"
                 "stockQuantity": 10
@@ -282,9 +279,89 @@ Vrátí informace o konkrétním zboží na skladě
 
     + Headers
             
-            Allow: GET, PUT
+            Allow: POST, PATCH, GET
 
 + Response 500
+
+### PATCH
+
+Umožnuje editovať produkt vrátane jeho ID (po tejto zmene už staré ID nebude dostupné, túto možnosť vyuťívať len v nutnom prípade!)
+Vracia informácie o zmenenom rodukte - jeho ID a URL, na kterom je dostupné.
+
+**Parameters**
+
+- id (123) ... unikátne ID produktu (na základe tohoto kódu sa párujú produkty, preto sa musí jednať o unikátne ID pre každý výrobok, ktoré sa v čase nemení)
+- ean ("8580000000000") ... EAN-13
+- name ("Šampón") ... názov produktu (max 150 znakov)
+- photoUrl ("http://example.com/image.png") ... odkaz na verejne prístupnú fotografiu produktu, napr. v e-shope (max 255 znakov)
+
++ Request (application/json)
+
+    + Headers
+    
+            X-Authentication-Simple: base64_encode(token)
+
+    + Body
+
+            {
+                "id": 123,
+                "ean": "1234",
+                "name": "Šampón",
+                "photoUrl": "http://example.com/image.png"
+            }
+
++ Response 201 (application/hal+json)
+
+    + Headers
+
+            Link: </products/1>;rel=self
+
+    + Body
+
+            {
+                "_links": {
+                    "self": { "href": "/products/1" }
+                },
+                "_id": 1
+            }
+
++ Response 409
+
+    + Headers
+
+            Link: </products/1>;rel=self
+
+    + Body
+
+            {
+                "_links": {
+                    "self": { "href": "/products/1" }
+                },
+                "error": "Resource already exists, send PUT at address in _links.self.href"
+            }
+
+
++ Response 500
+
+
++ Request Unauthorized
+
+    + Headers
+    
+            X-Authentication-Simple: abcd
+
++ Response 401
+
++ Response 405
+
+    + Headers
+            
+            Allow: POST, PATCH, GET
+
++ Response 500
+
+
+
 
 
 
