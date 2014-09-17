@@ -391,6 +391,7 @@ Vracia informácie o zmenenom rodukte - jeho ID a URL, na kterom je dostupné.
 - email (required, "email@example.com") ...  email adresáta
 - phone (required, "00421900123456") ...  tel. číslo adresáta
 - variableSymbol (required, "588988552") ...  variabilný symbol
+- parcelService("ups") ... preferovaná spoločnosť na prepravu, nepovinný parameter
 - cod ("54.98") ... suma dobierky - ak to nie je dobierka, tento parameter vynechat, alebo nastaviť nulovú hodnotu
 - note ("poznamka") ... poznámka k objednávke (slúži pre fulfillment centrum - nepreposiela sa adresátovi
 - items (required) ... zoznam produktov ID + množstvo - je nutné aby bol produkt vytvorený
@@ -417,11 +418,11 @@ Vracia informácie o zmenenom rodukte - jeho ID a URL, na kterom je dostupné.
                 "street": "Hronská 35",
                 "city": "Zvolen",
                 "psc": "96001",
-                "parcelService": "ups",
                 "country": "sk",
                 "email": "email@example.com",
                 "phone": "00421900123456",
                 "variableSymbol": "588988552",
+                "parcelService": "ups",
                 "cod": "54.98",
                 "note": "poznamka",
                 "_embedded":{
