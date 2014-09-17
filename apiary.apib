@@ -1,0 +1,506 @@
+FORMAT: 1A
+HOST: https://system.fhb.sk/api
+
+# Kika Api
+
+# Group Login
+
+Každý klient má svoje `appId` a `secret`, vygenerovať sa dá v ZOE (klientský portál). Pomocou týchto hodnôt sa prihlási a k dalším resoursom pristupuje pomocou access tokenu získaného pri prihlásení. 
+Keď token vyprší, je potrebné sa znovu prihlásiť a získat nový token.
+ 
+## Login [/login]
+ 
+- `token` - prístupový token (jeho maximálna dĺžka je 100 znakov)
+- `expiration` - datum a čas expirácie prístupového tokenu
+ 
+### POST
+ 
+**Parameters**
+ 
+- appId (required, string, `1234`) ... ID aplikace
+- secret (required, string, `1234`) ... Tajný kód aplikácie
+ 
++ Request (application/json)
+ 
+    + Body
+   
+            {
+                "appId": "1234",
+                "secret": "1234"
+            }
+ 
+    + Schema
+   
+            {
+                "type": "object",
+                "properties": {
+                    "appId": { "type": "string", "required": true },
+                    "secret": { "type": "string", "required": true }
+                }
+            }
+ 
++ Response 200 (application/json)
+ 
+    + Body
+ 
+            { "token": "A98ophrkh67", "expiration": "2014-07-08 15:00:00 +0100" }
+ 
+    + Schema
+ 
+            {
+                "type": "object",
+                "properties": {
+                    "token": { "type": "string", "required": true },
+                    "expiration": { "type": "string", "required": true }
+                }
+            }
+
++ Request (application/json)
+ 
+    + Body
+   
+            {
+                "appId": "",
+                "secret": ""
+            }
+ 
+    + Schema
+   
+            {
+                "type": "object",
+                "properties": {
+                    "appId": { "type": "string", "required": true },
+                    "secret": { "type": "string", "required": true }
+                }
+            }
+ 
++ Response 401
+ 
++ Response 405
+ 
+    + Headers
+           
+            Allow: POST
+ 
++ Response 500
+
+
+
+# Group Products
+
+## Products [/products]
+
+### POST
+
+Vrací informace o nově vytvořeném zboží - jeho interní ID a URL, na kterém je dostupné.
+
++ Request (application/json)
+
+    + Headers
+    
+            X-Authentication-Simple: base64_encode(token)
+
+    + Body
+
+            {
+                "id": 123,
+                "ean": "1234",
+                "name": "Šampón",
+                "photoUrl": "http://example.com/image.png"
+            }
+
++ Response 201 (application/hal+json)
+
+    + Headers
+
+            Link: </products/1>;rel=self
+
+    + Body
+
+            {
+                "_links": {
+                    "self": { "href": "/products/1" }
+                },
+                "_id": 1
+            }
+
++ Response 409
+
+    + Headers
+
+            Link: </products/1>;rel=self
+
+    + Body
+
+            {
+                "_links": {
+                    "self": { "href": "/products/1" }
+                },
+                "error": "Resource already exists, send PUT at address in _links.self.href"
+            }
+
+
++ Response 500
+
+
++ Request Unauthorized
+
+    + Headers
+    
+            X-Authentication-Simple: abcd
+
++ Response 401
+
++ Response 405
+
+    + Headers
+            
+            Allow: POST, GET
+
++ Response 500
+
+
+
+## Products [/products{?page}]
+
++ Parameters
+
+    + page (optional, number, `1`) ... Numeric `page` for pagination.
+
+### GET
+
+Umožňuje procházet existující zboží v databázi
+
++ Request (application/json)
+
+    + Headers
+    
+            X-Authentication-Simple: base64_encode(token)
+
++ Response 200 (application/hal+json)
+
+    + Headers
+
+            Link: </products?page=1>;rel=self,</products?page=2>;rel=next
+
+    + Body
+
+            {
+                "_links": {
+                    "self": { "href": "/products?page=1" },
+                    "next": { "href": "/products?page=2" }
+                },
+            {
+                "_links": {
+                    "self": { "href": "/products?page=1" },
+                    "next": { "href": "/products?page=2" }
+                },
+                "_embedded": {
+                    products[
+                        {
+                            "_links" : {
+                                "self": { "href": "/products/1" }
+                            },
+                            "_id": 1,
+    
+                            "id": 123,
+                            "ean": "1234",
+                            "name": "Šampón",
+                            "photoUrl": "http://example.com/image.png"
+                            "stockQuantity": 10
+                        },
+                        {
+                            "_links" : {
+                                "self": { "href": "/products/2" }
+                            },
+                            "_id": 2,
+    
+                            "id": 321,
+                            "ean": "4321",
+                            "name": "Mydlo",
+                            "photoUrl": "http://example.com/image.png"
+                            "stockQuantity": 5
+                        }
+                    ]
+                },
+                total: 2
+            }
+
+
++ Response 405
+
+    + Headers
+            
+            Allow: POST, GET
+
++ Response 500
+
+
+
+## Products [/products/{id}]
+
++ Parameters
+
+    + id (required, number, `1`) ... Numeric `id` of the Order to perform action with. Has example value.
+
+### GET
+
+Vrátí informace o konkrétním zboží na skladě
+
++ Request (application/json)
+
+    + Headers
+    
+            X-Authentication-Simple: base64_encode(token)
+
++ Response 200 (application/hal+json)
+
+    + Body
+
+            {
+                "_links" : {
+                    "self": { "href": "/products/1" }
+                },
+                "_id": 1,
+
+                "id": 123,
+                "ean": "1234",
+                "name": "Šampón",
+                "photoUrl": "http://example.com/image.png"
+                "stockQuantity": 10
+            }
+
+
++ Response 405
+
+    + Headers
+            
+            Allow: GET, PUT
+
++ Response 500
+
+
+
+# Group Orders
+
+
+## Orders [/orders]
+
+### POST
+
++ Request (application/json)
+
+    + Headers
+    
+            X-Authentication-Simple: base64_encode(token)
+
+    + Body
+
+            {
+                "id": 123,
+                "name": "Martin Novák",
+                "street": "Hronská 35",
+                "city": "Zvolen",
+                "psc": "96001",
+                "country": "sk",
+                "email": "email@example.com",
+                "phone": "00421900123456",
+                "variableSymbol": "588988552",
+                "cod": "54.98",
+                "note": "poznamka"
+                "_embedded":{
+                    items[
+                        {
+                            id: "123",
+                            qty: "5"
+                        }
+                        {
+                            id: "124",
+                            qty: "1"
+                        }
+                    ]
+                    notifyLinks[
+                        {
+                            confirmed: "http://example.com/api/order/123/confirm"
+                            send: "http://example.com/api/order/123/send"
+                        }
+                    ]
+                }
+                
+            }
+
++ Response 201 (application/hal+json)
+
+    + Headers
+
+            Link: </orders/1>;rel=self
+
+    + Body
+
+            {
+                "_links": {
+                    "self": { "href": "/orders/1" }
+                },
+                "_id": 1
+            }
+
++ Response 409
+
+    + Headers
+
+            Link: </orders/1>;rel=self
+
+    + Body
+
+            {
+                "_links": {
+                    "self": { "href": "/orders/1" }
+                },
+                "error": "Resource already exists, send PUT at address in _links.self.href"
+            }
+
+
++ Response 500
+
+
++ Request Unauthorized
+
+    + Headers
+    
+            X-Authentication-Simple: abcd
+
++ Response 401
+
++ Response 405
+
+    + Headers
+            
+            Allow: POST, GET
+
++ Response 500
+
+
+## Orders [/orders/{id}]
+
++ Parameters
+
+    + id (required, number, `1`) ... Numeric `id` of the Order to perform action with. Has example value.
+
+### GET
+
+Vráti info o konkretnej objednavke
+
++ Request (application/json)
+
+    + Headers
+    
+            X-Authentication-Simple: base64_encode(token)
+
++ Response 200 (application/hal+json)
+
+    + Body
+
+            {
+                "id": 123,
+                "status": "Delivered"
+                
+            }
+
++ Response 405
+
+    + Headers
+            
+            Allow: GET, PUT
+
++ Response 500
+
+
+### PATCH
+
++ Request (application/json)
+
+    + Headers
+    
+            X-Authentication-Simple: base64_encode(token)
+
+    + Body
+
+            {
+                "id": 123,
+                "name": "Martin Novák",
+                "street": "Hronská 35",
+                "city": "Zvolen",
+                "psc": "96001",
+                "country": "sk",
+                "email": "email@example.com",
+                "phone": "00421900123456",
+                "variableSymbol": "588988552",
+                "cod": "54.98",
+                "_embedded":{
+                    items[
+                        {
+                            id: "123",
+                            qty: "5"
+                        }
+                        {
+                            id: "124",
+                            qty: "1"
+                        }
+                    ]
+                }
+                
+            }
+
++ Response 201 (application/hal+json)
+
+    + Headers
+
+            Link: </orders/1>;rel=self
+
+    + Body
+
+            {
+                "_links": {
+                    "self": { "href": "/orders/1" }
+                },
+                "_id": 1
+            }
+
++ Response 409
+
+    + Headers
+
+            Link: </orders/1>;rel=self
+
+    + Body
+
+            {
+                "_links": {
+                    "self": { "href": "/orders/1" }
+                },
+                "error": "Resource already exists, send PUT at address in _links.self.href"
+            }
+
+
++ Response 500
+
+
++ Request Unauthorized
+
+    + Headers
+    
+            X-Authentication-Simple: abcd
+
++ Response 401
+
++ Response 405
+
+    + Headers
+            
+            Allow: POST, GET, DELETE
+
++ Response 500
+
+
+
+
