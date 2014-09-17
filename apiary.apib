@@ -100,7 +100,8 @@ Vracia informácie o novo vytvorenom produkte - jeho ID a URL, na kterom je dost
 - ean ("8580000000000") ... EAN-13
 - name (required, "Šampón") ... názov produktu (max 150 znakov)
 - photoUrl ("http://example.com/image.png") ... odkaz na verejne prístupnú fotografiu produktu, napr. v e-shope (max 255 znakov)
-
+- type("single")- ... nepovinný parameter, defaulne "single" - jednoduchý produkt, može byť "multi" v prípade, že sa jedna o zložený výrobok
+- parts() ... uvadzať len v prípade type: multi - zoznam produktov (musia existovat), z ktorych sa sklada zlozeny produkt 
 + Request (application/json)
 
     + Headers
@@ -114,9 +115,9 @@ Vracia informácie o novo vytvorenom produkte - jeho ID a URL, na kterom je dost
                 "ean": "8580000001234",
                 "name": "Šampón",
                 "photoUrl": "http://example.com/image.png"
-                "type": "single"/* defaulne "single" - nepovinný parameter, moze byť "multi" v prípade, že sa jedna o zložený výrobok*/
+                "type": "single"
                 "_embedded":{
-                    parts[ //uvadzat len v pripade type: multi - zoznam produktov (musia existovat), z ktorych sa sklada zlozeny produkt
+                    parts[
                         {
                             id: "123",
                         }
@@ -378,6 +379,19 @@ Vracia informácie o zmenenom rodukte - jeho ID a URL, na kterom je dostupné.
 ## Orders [/orders]
 
 ### POST
+**Parameters**
+    - id (required, 123) ... unikátne ID objednávky (string 30) - objednávka s konkrétnym ID bude akceptovaná len jeden krát. Ako ID je možné použiť napr variabilný symbol
+    - name (required, "Martin Novák") ... Meno a priezvisko adresáta
+    - street (required, "Hronská 35") ... Adresa doručenia
+    - city ("Zvolen") ... Mesto doručenia
+    - psc (required, "96001") ... PSC
+    - country (required, "sk") ...  ISO 3166-1 alpha-2
+    - email (required, "email@example.com") ...  email adresáta
+    - phone (required, "00421900123456") ...  tel. číslo adresáta
+    - variableSymbol (required, "588988552") ...  variabilný symbol
+    - cod ("54.98") ... suma dobierky - ak to nie je dobierka, tento parameter vynechat, alebo nastaviť nulovú hodnotu
+    - note ("poznamka") ... poznámka k objednávke (slúži pre fulfillment centrum - nepreposiela sa adresátovi
+    - items (required) ... zoznam produktov ID + množstvo - je nutné aby bol produkt vytvorený
 
 + Request (application/json)
 
@@ -388,21 +402,21 @@ Vracia informácie o zmenenom rodukte - jeho ID a URL, na kterom je dostupné.
     + Body
 
             {
-                "id": 123, //[povinné] unikátne ID objednávky (string 30) - objednávka s konkrétnym ID bude akceptovaná len jeden krát. Ako ID je možné použiť napr variabilný symbol
-                "name": "Martin Novák", //[povinné] Meno a priezvisko adresáta
-                "street": "Hronská 35", //[povinné] Adresa doručenia
-                "city": "Zvolen", //[povinné] Mesto doručenia
-                "psc": "96001", //[povinné]
-                "country": "sk", //[povinné] ISO 3166-1 alpha-2
-                "email": "email@example.com", //[povinné] email adresáta
-                "phone": "00421900123456", //[povinné] tel. číslo adresáta
-                "variableSymbol": "588988552", //[povinné] variabilný symbol
-                "cod": "54.98", //suma dobierky - ak to nie je dobierka, tento parameter vynechat, alebo nastaviť nulovú hodnotu
-                "note": "poznamka" //poznámka k objednávke (slúži pre fulfillment centrum - nepreposiela sa adresátovi)
+                "id": 123, 
+                "name": "Martin Novák", 
+                "street": "Hronská 35",
+                "city": "Zvolen",
+                "psc": "96001",
+                "country": "sk",
+                "email": "email@example.com",
+                "phone": "00421900123456",
+                "variableSymbol": "588988552",
+                "cod": "54.98",
+                "note": "poznamka",
                 "_embedded":{
                     items[
                         {
-                            id: "123", //kód produktu - je nutné aby bol produkt vytvorený
+                            id: "123",
                             qty: "5"
                         }
                         {
