@@ -414,7 +414,7 @@ Vracia informácie o zmenenom rodukte - jeho ID a URL, na kterom je dostupné.
                 "note": "poznamka",
                 "invoiceLink": "http://example.com/order/inv123.pdf",
                 "_embedded":{
-                    items[
+                    "items":[
                         {
                             id: "123",
                             qty: "5"
@@ -424,7 +424,7 @@ Vracia informácie o zmenenom rodukte - jeho ID a URL, na kterom je dostupné.
                             qty: "1"
                         }
                     ]
-                    notifyLinks[
+                    "notifyLinks":[
                         {
                             confirmed: "http://example.com/api/order/123/confirm" 
                             sent: "http://example.com/api/order/123/sent"
@@ -523,10 +523,10 @@ Vráti info o konkretnej objednávke
                 "note": "poznamka",
                 "invoiceLink": "http://example.com/order/inv123.pdf",
                 "_embedded":{
-                    "trackingNumber"[
+                    "trackingNumber":[
                          "123", "124"
                     ]
-                    items[
+                    "items":[
                         {
                             id: "123",
                             qty: "5"
@@ -572,7 +572,7 @@ Prepíše objednávku s rovnakým ID, je možné len v prípade, že je v stave 
                 "variableSymbol": "588988552",
                 "cod": "54.98",
                 "_embedded":{
-                    items[
+                    "items":[
                         {
                             id: "123",
                             qty: "5"
