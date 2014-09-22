@@ -450,17 +450,11 @@ Vracia informácie o zmenenom rodukte - jeho ID a URL, na kterom je dostupné.
 
 + Response 409
 
-    + Headers
-
-            Link: </orders/1>;rel=self
-
     + Body
 
             {
-                "_links": {
-                    "self": { "href": "/orders/1" }
-                },
-                "error": "Resource already exists, send PUT at address in _links.self.href"
+                "status": "error"
+                "message": "Resource already exists, send PUT at address"
             }
 
 
@@ -477,7 +471,8 @@ Vracia informácie o zmenenom rodukte - jeho ID a URL, na kterom je dostupné.
     + Body
 
             {
-                "error": "Product with id 124 not found, please create it via POST /products"
+                "status": "error"
+                "message": "Product with id 124 not found, please create it via POST /products"
             }
 
 + Response 405
@@ -605,21 +600,17 @@ Prepíše objednávku s rovnakým ID, je možné len v prípade, že je v stave 
     + Body
 
             {
-                "error": "Product with id 124 not found, please create it via POST /products"
+                "status": "error"
+                "message": "Product with id 124 not found, please create it via POST /products"
             }
 + Response 409
 
-    + Headers
-
-            Link: </orders/1>;rel=self
 
     + Body
 
             {
-                "_links": {
-                    "self": { "href": "/orders/1" }
-                },
-                "error": "Order has not Pending status"
+                "status": "error"
+                "message": "Order has not Pending status"
             }
 
 
@@ -683,10 +674,8 @@ Vymaže objednávku je možné len v prípade, že je v stave Pending.
     + Body
 
             {
-                "_links": {
-                    "self": { "href": "/orders/1" }
-                },
-                "error": "Order has not Pending status"
+                "status": "error"
+                "message": "Order has not Pending status"
             }
 
 
