@@ -120,10 +120,10 @@ Vracia informácie o novo vytvorenom produkte - jeho ID a URL, na kterom je dost
                 "_embedded":{
                     "parts":[
                         {
-                            id: "123",
+                            "id": "123",
                         }
                         {
-                            id: "124",
+                            "id": "124",
                         }
                     ]
                 }
@@ -237,7 +237,7 @@ Umožňuje procházet existujúce produkty v databáze, vracia informácie o vý
                         }
                     ]
                 },
-                total: 2
+                "total": 2
             }
 
 
@@ -414,18 +414,18 @@ Vracia informácie o zmenenom rodukte - jeho ID a URL, na kterom je dostupné.
                 "_embedded":{
                     "items":[
                         {
-                            id: "123",
-                            qty: "5"
+                            "id": "123",
+                            "qty": "5"
                         }
                         {
-                            id: "124",
-                            qty: "1"
+                            "id": "124",
+                            "qty": "1"
                         }
                     ]
                     "notifyLinks":[
                         {
-                            confirmed: "http://example.com/api/order/123/confirm" 
-                            sent: "http://example.com/api/order/123/sent"
+                            "confirmed": "http://example.com/api/order/123/confirm" 
+                            "sent": "http://example.com/api/order/123/sent"
                         }
                     ]
                 }
@@ -525,12 +525,12 @@ Vráti info o konkretnej objednávke
                     "trackingNumber":["123", "124"],
                     "items":[
                         {
-                            id: "123",
-                            qty: "5"
+                            "id": "123",
+                            "qty": "5"
                         }
                         {
-                            id: "124",
-                            qty: "1"
+                            "id": "124",
+                            "qty": "1"
                         }
                     ]
                 }
@@ -571,12 +571,12 @@ Prepíše objednávku s rovnakým ID, je možné len v prípade, že je v stave 
                 "_embedded":{
                     "items":[
                         {
-                            id: "123",
-                            qty: "5"
+                            "id": "123",
+                            "qty": "5"
                         }
                         {
-                            id: "124",
-                            qty: "1"
+                            "id": "124",
+                            "qty": "1"
                         }
                     ]
                 }
