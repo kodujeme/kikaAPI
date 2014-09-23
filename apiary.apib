@@ -323,7 +323,7 @@ Vracia informácie o zmenenom rodukte - jeho ID a URL, na kterom je dostupné.
                 "photoUrl": "http://example.com/image.png"
             }
 
-+ Response 201 (application/hal+json)
++ Response 200 (application/hal+json)
 
     + Headers
 
@@ -455,7 +455,7 @@ Vracia informácie o zmenenom rodukte - jeho ID a URL, na kterom je dostupné.
     + Body
 
             {
-                "status": "error"
+                "status": "error",
                 "message": "Resource already exists, send PUT at address"
             }
 
@@ -473,8 +473,9 @@ Vracia informácie o zmenenom rodukte - jeho ID a URL, na kterom je dostupné.
     + Body
 
             {
-                "status": "error"
-                "message": "Product with id 124 not found, please create it via POST /products"
+                "status": "error",
+                "message": "Product with id 124 not found, please create it via POST /products",
+                "productId": "124"
             }
 
 + Response 405
@@ -524,9 +525,7 @@ Vráti info o konkretnej objednávke
                 "note": "poznamka",
                 "invoiceLink": "http://example.com/order/inv123.pdf",
                 "_embedded":{
-                    "trackingNumber":[
-                         "123", "124"
-                    ]
+                    "trackingNumber":["123", "124"],
                     "items":[
                         {
                             id: "123",
@@ -587,7 +586,7 @@ Prepíše objednávku s rovnakým ID, je možné len v prípade, že je v stave 
                 
             }
 
-+ Response 201 (application/hal+json)
++ Response 200 (application/hal+json)
 
     + Headers
 
@@ -605,8 +604,9 @@ Prepíše objednávku s rovnakým ID, je možné len v prípade, že je v stave 
     + Body
 
             {
-                "status": "error"
-                "message": "Product with id 124 not found, please create it via POST /products"
+                "status": "error",
+                "message": "Product with id 124 not found, please create it via POST /products",
+                "productId": "124"
             }
 + Response 409
 
@@ -614,7 +614,7 @@ Prepíše objednávku s rovnakým ID, je možné len v prípade, že je v stave 
     + Body
 
             {
-                "status": "error"
+                "status": "error",
                 "message": "Order has not Pending status"
             }
 
@@ -655,7 +655,7 @@ Vymaže objednávku je možné len v prípade, že je v stave Pending.
                 "id": 123,
             }
 
-+ Response 201 (application/hal+json)
++ Response 200 (application/hal+json)
 
     + Headers
 
@@ -679,7 +679,7 @@ Vymaže objednávku je možné len v prípade, že je v stave Pending.
     + Body
 
             {
-                "status": "error"
+                "status": "error",
                 "message": "Order has not Pending status"
             }
 
