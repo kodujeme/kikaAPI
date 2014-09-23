@@ -421,10 +421,10 @@ Vracia informácie o zmenenom rodukte - jeho ID a URL, na kterom je dostupné.
                             "id": "124",
                             "qty": "1"
                         }
-                    ]
+                    ],
                     "notifyLinks":[
                         {
-                            "confirmed": "http://example.com/api/order/123/confirm" 
+                            "confirmed": "http://example.com/api/order/123/confirm",
                             "sent": "http://example.com/api/order/123/sent"
                         }
                     ]
@@ -558,8 +558,8 @@ Prepíše objednávku s rovnakým ID, je možné len v prípade, že je v stave 
     + Body
 
             {
-                "id": 123,
-                "name": "Martin Novák",
+                "id": 123, 
+                "name": "Martin Novák", 
                 "street": "Hronská 35",
                 "city": "Zvolen",
                 "psc": "96001",
@@ -567,7 +567,10 @@ Prepíše objednávku s rovnakým ID, je možné len v prípade, že je v stave 
                 "email": "email@example.com",
                 "phone": "00421900123456",
                 "variableSymbol": "588988552",
+                "parcelService": "ups",
                 "cod": "54.98",
+                "note": "poznamka",
+                "invoiceLink": "http://example.com/order/inv123.pdf",
                 "_embedded":{
                     "items":[
                         {
@@ -577,6 +580,12 @@ Prepíše objednávku s rovnakým ID, je možné len v prípade, že je v stave 
                         {
                             "id": "124",
                             "qty": "1"
+                        }
+                    ],
+                    "notifyLinks":[
+                        {
+                            "confirmed": "http://example.com/api/order/123/confirm",
+                            "sent": "http://example.com/api/order/123/sent"
                         }
                     ]
                 }
