@@ -655,26 +655,8 @@ Vymaže objednávku je možné len v prípade, že je v stave Pending.
     
             X-Authentication-Simple: base64_encode(token)
 
-    + Body
 
-            {
-                "id": 123,
-            }
-
-+ Response 200 (application/hal+json)
-
-    + Headers
-
-            Link: </orders/1>;rel=self
-
-    + Body
-
-            {
-                "_links": {
-                    "self": { "href": "/orders/1" }
-                },
-                "_id": 1
-            }
++ Response 204
 
 + Response 409
 
