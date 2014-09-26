@@ -29,15 +29,7 @@ Keď token vyprší, je potrebné sa znovu prihlásiť a získat nový token.
                 "secret": "1234"
             }
  
-    + Schema
-   
-            {
-                "type": "object",
-                "properties": {
-                    "appId": { "type": "string", "required": true },
-                    "secret": { "type": "string", "required": true }
-                }
-            }
+
  
 + Response 200 (application/json)
  
@@ -149,7 +141,7 @@ Vracia informácie o novo vytvorenom produkte - jeho ID a URL, na kterom je dost
                 "_links": {
                     "self": { "href": "/products/1" }
                 },
-                "error": "Resource already exists, send PUT at address in _links.self.href"
+                "error": "Resource already exists, send PUT"
             }
 
 
@@ -421,9 +413,6 @@ Vracia informácie o zmenenom rodukte - jeho ID a URL, na kterom je dostupné.
 
 + Response 201 (application/hal+json)
 
-    + Headers
-
-            Link: </orders/1>;rel=self
 
     + Body
 
@@ -453,13 +442,13 @@ Vracia informácie o zmenenom rodukte - jeho ID a URL, na kterom je dostupné.
     
             X-Authentication-Simple: abcd
 
-+ Response 400
++ Response 404
     + Body
 
             {
                 "status": "error",
                 "message": "Product with id 124 not found, please create it via POST /products",
-                "productId": "124"
+                "id": "124"
             }
 
 + Response 405
@@ -581,10 +570,6 @@ Prepíše objednávku s rovnakým ID, je možné len v prípade, že je v stave 
 
 + Response 200 (application/hal+json)
 
-    + Headers
-
-            Link: </orders/1>;rel=self
-
     + Body
 
             {
@@ -593,14 +578,15 @@ Prepíše objednávku s rovnakým ID, je možné len v prípade, že je v stave 
                 },
                 "_id": 1
             }
-+ Response 400
++ Response 404
     + Body
 
             {
                 "status": "error",
                 "message": "Product with id 124 not found, please create it via POST /products",
-                "productId": "124"
+                "id": "124"
             }
+            
 + Response 409
 
 
@@ -646,10 +632,6 @@ Vymaže objednávku je možné len v prípade, že je v stave Pending.
 + Response 204
 
 + Response 409
-
-    + Headers
-
-            Link: </orders/1>;rel=self
 
     + Body
 
