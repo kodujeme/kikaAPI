@@ -131,9 +131,6 @@ Vracia informácie o novo vytvorenom produkte - jeho ID a URL, na kterom je dost
 
 + Response 201 (application/hal+json)
 
-    + Headers
-
-            Link: </products/1>;rel=self
 
     + Body
 
@@ -145,10 +142,6 @@ Vracia informácie o novo vytvorenom produkte - jeho ID a URL, na kterom je dost
             }
 
 + Response 409
-
-    + Headers
-
-            Link: </products/1>;rel=self
 
     + Body
 
@@ -199,9 +192,6 @@ Umožňuje procházet existujúce produkty v databáze, vracia informácie o vý
 
 + Response 200 (application/hal+json)
 
-    + Headers
-
-            Link: </products?page=1>;rel=self,</products?page=2>;rel=next
 
     + Body
 
@@ -322,9 +312,6 @@ Vracia informácie o zmenenom rodukte - jeho ID a URL, na kterom je dostupné.
 
 + Response 200 (application/hal+json)
 
-    + Headers
-
-            Link: </products/1>;rel=self
 
     + Body
 
