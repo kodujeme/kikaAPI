@@ -10,15 +10,15 @@ Keď token vyprší, je potrebné sa znovu prihlásiť a získat nový token.
  
 ## Login [/login]
  
-- `token` - prístupový token (jeho maximálna dĺžka je 100 znakov)
+- `token` - prístupový token (jeho maximálna dĺžka je 80 znakov)
 - `expiration` - datum a čas expirácie prístupového tokenu
  
 ### POST
  
 **Parameters**
  
-- appId (required, string, `1234`) ... ID aplikace
-- secret (required, string, `1234`) ... Tajný kód aplikácie
+- appId (required, string, `1234`) ... ID aplikace //32 znakov
+- secret (required, string, `1234`) ... Tajný kód aplikácie //40 znakov
  
 + Request (application/json)
  
