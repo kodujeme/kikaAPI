@@ -498,7 +498,7 @@ Vráti info o konkretnej objednávke
                 "parcelService": "ups",
                 "cod": "54.98",
                 "note": "poznamka",
-                "invoiceLink": "http://example.com/order/inv123.pdf",
+                "invoiceLink": "http://example.com/order/inv123.pdf", 
                 "_embedded":{
                     "trackingNumber":["123", "124"],
                     "items":[
@@ -548,7 +548,7 @@ Prepíše objednávku s rovnakým ID, je možné len v prípade, že je v stave 
                 "parcelService": "ups",
                 "cod": "54.98",
                 "note": "poznamka",
-                "invoiceLink": "http://example.com/order/inv123.pdf",
+                "invoiceLink": "http://example.com/order/inv123.pdf", //max. 255 znakov
                 "_embedded":{
                     "items":[
                         {
@@ -562,8 +562,8 @@ Prepíše objednávku s rovnakým ID, je možné len v prípade, že je v stave 
                     ],
                     "notifyLinks":[
                         {
-                            "confirmed": "http://example.com/api/order/123/confirm",
-                            "sent": "http://example.com/api/order/123/sent"
+                            "confirmed": "http://example.com/api/order/123/confirm", //max. 255 znakov
+                            "sent": "http://example.com/api/order/123/sent" //max. 255 znakov
                         }
                     ]
                 }
