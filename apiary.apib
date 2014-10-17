@@ -380,7 +380,7 @@ Vracia informácie o zmenenom rodukte - jeho ID a URL, na kterom je dostupné. P
     + Body
 
             {
-                "id": 123, 
+                "id": "123", 
                 "name": "Martin Novák", 
                 "street": "Hronská 35",
                 "city": "Zvolen",
@@ -421,9 +421,8 @@ Vracia informácie o zmenenom rodukte - jeho ID a URL, na kterom je dostupné. P
 
             {
                 "_links": {
-                    "self": { "href": "/orders/1" }
+                    "self": { "href": "/orders/?id=123" }
                 },
-                "_id": 1
             }
 
 + Response 409
