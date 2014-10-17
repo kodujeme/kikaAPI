@@ -94,7 +94,7 @@ Vracia informácie o novo vytvorenom produkte - jeho ID a URL, na kterom je dost
 - name (required, "Šampón") ... názov produktu (max 150 znakov)
 - photoUrl ("http://example.com/image.png") ... odkaz na verejne prístupnú fotografiu produktu, napr. v e-shope (max 255 znakov)
 - type("single")- ... nepovinný parameter, defaulne "single" - jednoduchý produkt, može byť "multi" v prípade, že sa jedna o zložený výrobok
-- parts() ... uvadzať len v prípade type: multi - zoznam produktov (musia existovat), z ktorych sa sklada zlozeny produkt 
+- parts() ... uvadzať len v prípade type: multi - zoznam produktov (musia existovat), z ktorych sa sklada zlozeny produkt (default qty = 1)
 + Request (application/json)
 
     + Headers
@@ -113,9 +113,11 @@ Vracia informácie o novo vytvorenom produkte - jeho ID a URL, na kterom je dost
                     "parts":[
                         {
                             "id": "123",
+                            "qty": 1
                         }
                         {
                             "id": "124",
+                            "qty": 1
                         }
                     ]
                 }
