@@ -132,7 +132,6 @@ Vracia informácie o novo vytvorenom produkte - jeho ID a URL, na kterom je dost
                 "_links": {
                     "self": { "href": "/products/1" }
                 },
-                "_id": 1
             }
 
 + Response 409
@@ -201,7 +200,7 @@ Umožňuje procházet existujúce produkty v databáze, vracia informácie o vý
                             "_links" : {
                                 "self": { "href": "/products/1" }
                             },
-                            "_id": 1,
+                            "id": 1,
     
                             "ean": "8580000000000",
                             "name": "Šampón",
@@ -212,8 +211,8 @@ Umožňuje procházet existujúce produkty v databáze, vracia informácie o vý
                             "_links" : {
                                 "self": { "href": "/products/2" }
                             },
-                            "_id": 2,
-    
+                            
+                            "id": 2,
                             "ean": "4321000000000",
                             "name": "Mydlo",
                             "photoUrl": "http://example.com/image2.png"
@@ -261,8 +260,7 @@ Vrátí informace o konkrétnom produkte a jeho aktuálny stav na sklade
                 "_links" : {
                     "self": { "href": "/products/1" }
                 },
-                "_id": 1,
-
+                "id": 1,
                 "ean": "8580000000000",
                 "name": "Šampón",
                 "photoUrl": "http://example.com/image.png",
