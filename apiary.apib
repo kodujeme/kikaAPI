@@ -354,7 +354,7 @@ Vracia informácie o zmenenom rodukte - jeho ID a URL, na kterom je dostupné. P
 - email (required, "email@example.com") ...  email adresáta
 - phone (required, "00421900123456") ...  tel. číslo adresáta
 - variableSymbol (required, "588988552") ...  variabilný symbol
-- parcelService("ups") ... ["ups", "remax", "dhl", "gls", "posta"] preferovaná spoločnosť na prepravu, nepovinný parameter 
+- parcelService("remax") ... ["remax", "ups", "dhl", "gls", "posta"] preferovaná spoločnosť na prepravu, nepovinný parameter 
 - cod ("54.98") ... suma dobierky - ak to nie je dobierka, tento parameter vynechat, alebo nastaviť nulovú hodnotu
 - note ("poznamka") ... poznámka k objednávke (slúži pre fulfillment centrum - nepreposiela sa adresátovi
 - items (required) ... zoznam produktov ID + množstvo - je nutné aby bol produkt vytvorený
@@ -386,7 +386,7 @@ Vracia informácie o zmenenom rodukte - jeho ID a URL, na kterom je dostupné. P
                 "email": "email@example.com",
                 "phone": "00421900123456",
                 "variableSymbol": "588988552",
-                "parcelService": "ups",
+                "parcelService": "remax",
                 "cod": "54.98",
                 "note": "poznamka",
                 "invoiceLink": "http://example.com/order/inv123.pdf",
@@ -481,8 +481,8 @@ Vráti info o konkretnej objednávke
 
             {
                 "id": 123,
-                "status": "delivered", //pending, confirmed, sent, delivered, rejected
-                "parcelService": "ups",
+                "status": "sent", //pending, confirmed, sent, delivered, rejected
+                "parcelService": "remax",
                 "name": "Martin Novák", 
                 "street": "Hronská 35",
                 "city": "Zvolen", 
@@ -538,7 +538,7 @@ Prepíše objednávku s rovnakým ID, je možné len v prípade, že je v stave 
                 "email": "email@example.com",
                 "phone": "00421900123456",
                 "variableSymbol": "588988552",
-                "parcelService": "ups",
+                "parcelService": "remax",
                 "cod": "54.98",
                 "note": "poznamka",
                 "invoiceLink": "http://example.com/order/inv123.pdf", //max. 255 znakov
