@@ -107,14 +107,14 @@ Vracia informácie o novo vytvorenom produkte - jeho ID a URL, na kterom je dost
                 "id": 123,
                 "ean": "8580000001234",
                 "name": "Šampón",
-                "photoUrl": "http://example.com/image.png"
-                "type": "single"
+                "photoUrl": "http://example.com/image.png",
+                "type": "single",
                 "_embedded":{
                     "parts":[
                         {
                             "id": "123",
                             "qty": 1
-                        }
+                        },
                         {
                             "id": "124",
                             "qty": 1
@@ -201,10 +201,9 @@ Umožňuje procházet existujúce produkty v databáze, vracia informácie o vý
                                 "self": { "href": "/products/1" }
                             },
                             "id": 1,
-    
-                            "ean": "8580000000000",
+                                "ean": "8580000000000",
                             "name": "Šampón",
-                            "photoUrl": "http://example.com/image1.png"
+                            "photoUrl": "http://example.com/image1.png",
                             "stockQuantity": 10
                         },
                         {
@@ -215,12 +214,12 @@ Umožňuje procházet existujúce produkty v databáze, vracia informácie o vý
                             "id": 2,
                             "ean": "4321000000000",
                             "name": "Mydlo",
-                            "photoUrl": "http://example.com/image2.png"
+                            "photoUrl": "http://example.com/image2.png",
                             "stockQuantity": 5
                         }
                     ]
                 },
-                "total": 2
+                "total": 2,
                 "count": 2
             }
 
@@ -468,6 +467,9 @@ Vracia informácie o zmenenom rodukte - jeho ID a URL, na kterom je dostupné. P
 ### GET
 
 Vráti info o konkretnej objednávke
+**Parameters**
+- status: sent pending, confirmed, sent, delivered, rejected
+
 
 + Request (application/json)
 
@@ -481,7 +483,7 @@ Vráti info o konkretnej objednávke
 
             {
                 "id": 123,
-                "status": "sent", //pending, confirmed, sent, delivered, rejected
+                "status": "sent",
                 "parcelService": "remax",
                 "name": "Martin Novák", 
                 "street": "Hronská 35",
@@ -519,6 +521,7 @@ Vráti info o konkretnej objednávke
 ### PUT
 
 Prepíše objednávku s rovnakým ID, je možné len v prípade, že je v stave Pending, rovnake parametre ako pri POST.
+Links: max 255 znakov
 
 + Request (application/json)
 
@@ -541,7 +544,7 @@ Prepíše objednávku s rovnakým ID, je možné len v prípade, že je v stave 
                 "parcelService": "remax",
                 "cod": "54.98",
                 "note": "poznamka",
-                "invoiceLink": "http://example.com/order/inv123.pdf", //max. 255 znakov
+                "invoiceLink": "http://example.com/order/inv123.pdf", 
                 "_embedded":{
                     "items":[
                         {
@@ -555,8 +558,8 @@ Prepíše objednávku s rovnakým ID, je možné len v prípade, že je v stave 
                     ],
                     "notifyLinks":[
                         {
-                            "confirmed": "http://example.com/api/order/123/confirm", //max. 255 znakov
-                            "sent": "http://example.com/api/order/123/sent" //max. 255 znakov
+                            "confirmed": "http://example.com/api/order/123/confirm", 
+                            "sent": "http://example.com/api/order/123/sent" 
                         }
                     ]
                 }
@@ -653,9 +656,3 @@ Vymaže objednávku je možné len v prípade, že je v stave Pending.
             Allow: GET, PUT, DELETE
 
 + Response 500
-
-
-
-
-
-
