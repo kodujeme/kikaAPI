@@ -7,6 +7,7 @@ HOST: https://system.fhb.sk/api/v1
 
 Každý klient má svoje `appId` a `secret`, vygenerovať sa dá v ZOE (klientský portál). Pomocou týchto hodnôt sa prihlási a k dalším resoursom pristupuje pomocou access tokenu získaného pri prihlásení. 
 Keď token vyprší, je potrebné sa znovu prihlásiť a získat nový token.
+Token sa zasiela v hlavicke a musi byt kodovany do base64!
  
 ## Login [/login]
  
